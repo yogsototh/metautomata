@@ -15,7 +15,7 @@ def drawStateParam(expr nom, position, anglab) =
     pair ps;
     path s;
     p :=fullcircle scaled 3u shifted position;
-    drawShadow(p);  
+    drawShadow(p);
 % fill p withcolor white ;
     unfill p ;
     draw p ;
@@ -41,7 +41,7 @@ def drawStateParam(expr nom, position, anglab) =
   endgroup ;
 enddef ;
 
-% affiche un état 
+% affiche un état
 def drawState(expr nom, position) =
   begingroup ;
     drawStateParam(nom, position, -45) ;
@@ -73,13 +73,13 @@ def drawIState(expr nom, message, position) =
   begingroup ;
     path p;
     p :=fullcircle scaled 3u shifted position;
-    
+
     drawState(nom,position)
-    
+
     % affiche de la flèche d'entrée
     path r;
     pair debut;
-    debut := position shifted (-2.7u,0); 
+    debut := position shifted (-2.7u,0);
     r:=debut--center p;
     pair pr;
     pr := p intersectionpoint r;
@@ -103,13 +103,13 @@ def drawIFState(expr nom, ini, term, position) =
   begingroup ;
     path p;
     p :=fullcircle scaled 3u shifted position;
-    
+
     drawIState(nom,ini,position);
-  
+
   % affichage du second cercle et de la valeur term
 %    draw p blownup -.3u withpen pencircle scaled .02u;
     draw p blownup -.3u ;
-    
+
     %picture pic;
     %pic := thelabel(term,origin);
     %numeric taille;
@@ -130,7 +130,7 @@ def largeur(expr texte) =
     pic := thelabel(texte, origin);
     numeric taille;
     taille := abs ((ulcorner pic) - (urcorner pic));
-    taille 
+    taille
     endgroup ;
 enddef ;
 
@@ -140,7 +140,7 @@ def hauteur(expr texte) =
     pic := thelabel(texte, origin);
     numeric taille;
     taille := abs ((urcorner pic) - (lrcorner pic));
-    taille 
+    taille
     endgroup ;
 enddef ;
 
@@ -150,7 +150,7 @@ def diag(expr texte) =
     pic := thelabel(texte, origin);
     numeric taille;
     taille := abs(urcorner pic);
-    taille 
+    taille
     endgroup ;
 enddef ;
 
@@ -178,20 +178,20 @@ def drawLoop(expr ori, angle, mesg) =
 enddef;
 
 def Cadre (expr longueur,hauteur,arrondi) =
-  begingroup   
+  begingroup
     path res ;
     pair A,B ;
     A:=origin ;
     B:=A shifted (arrondi,arrondi) ;
-    
-    res := origin -- origin + 
+
+    res := origin -- origin +
            (longueur,0) {right} .. {up} B +
            (longueur,0) -- B+(longueur,hauteur) ;
     res := res {up}..
-           {left} res rotated 180 shifted (longueur,hauteur+(2*arrondi)) {down} .. 
+           {left} res rotated 180 shifted (longueur,hauteur+(2*arrondi)) {down} ..
            {right}cycle ;
-    res 
-  endgroup 
+    res
+  endgroup
 enddef;
 
 def drawCadre (expr llcorn, urcorn ) =
@@ -237,14 +237,14 @@ def drawArcParam(expr ori, arr, angl, mesg, posl, invert) =
       prb := p shifted ori intersectionpoint r;
       r := r cutbefore prb;
       r := r cutbefore (point taillepen on r);
-      
+
       pre := p shifted arr intersectionpoint r;
       r := r cutafter pre;
       r := r cutafter (point -taillepen on r);
 
-      picture etiquette ; 
+      picture etiquette ;
       etiquette:=thelabel(mesg, origin);
-      pair hauteur, largeur; 
+      pair hauteur, largeur;
       hauteur := (ulcorner etiquette) - (llcorner etiquette);
       hauteur := hauteur scaled .5;
       hauteur := hauteur + (0,.3u);
@@ -252,18 +252,18 @@ def drawArcParam(expr ori, arr, angl, mesg, posl, invert) =
       largeur := (urcorner etiquette) - (ulcorner etiquette);
       largeur := largeur scaled .5 ;
       largeur := largeur + (.15u,0);
-      
+
       drawarrow r ;
-    
+
       pair centre;
       numeric an;
-      
+
       centre := point posl*length r of r ;
       an := angle direction posl*length r of r ;
-   
+
       if invert:
-        hauteur := -hauteur ; 
-        largeur := -largeur ; 
+        hauteur := -hauteur ;
+        largeur := -largeur ;
       fi ;
 
       if (an > -35) and (an < 35):

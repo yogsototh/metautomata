@@ -6,16 +6,16 @@
 % input shadows
 %
 % beginfig(1);
-%   path p; p :=fullcircle scaled 3u; 
+%   path p; p :=fullcircle scaled 3u;
 %
-%   drawShadow(p);  
+%   drawShadow(p);
 %   fill p withcolor white;
 %   draw p withpen pencircle scaled .02u;
 %   draw p blownup -.3u withpen pencircle scaled .02u;
 %   label(btex $$\frac{1}{2}$$ etex, origin);
 % endfig;
 % -------
-% 
+%
 %  Qualité maximale tolérée 84.
 %
 %
@@ -41,7 +41,7 @@ def drawShadowWithParameters(expr p, decalage, smooth, quality, grey, couleur) =
       if cycle p :
         path shadow ;
         pair dcl;
-      
+
         shadow := p shifted decalage ;
         % fill shadow withcolor transparent(1,factor,black) ;
         dcl:=(0,0);
@@ -54,7 +54,7 @@ def drawShadowWithParameters(expr p, decalage, smooth, quality, grey, couleur) =
       else :
         path shadow ;
         pair dcl;
-      
+
         shadow := p shifted decalage ;
         dcl:=(0,0);
         for j=-qual upto qual :
@@ -76,7 +76,7 @@ def drawShadowWithParameters(expr p, decalage, smooth, quality, grey, couleur) =
 	endfor ;
       endfor ;
     fi ;
-    
+
   endgroup ;
 enddef ;
 
@@ -88,17 +88,17 @@ shadowsDefaultSmooth := .18u ;
 
 numeric shadowsDefaultQuality ;
 shadowsDefaultQuality := 17 ;
- 
+
 numeric shadowsDefaultGrey ;
 shadowsDefaultGrey := .3 ;
 
 color shadowsDefaultColor ;
 shadowsDefaultColor := black ;
 
- 
+
 % affiche l'ombre d'un chemin avec les paramètres par défaults
 def drawShadow(expr p) =
-    drawShadowWithParameters(p, shadowsDefaultDecalage, shadowsDefaultSmooth, 
+    drawShadowWithParameters(p, shadowsDefaultDecalage, shadowsDefaultSmooth,
                              shadowsDefaultQuality, shadowsDefaultGrey,
                              shadowsDefaultColor) ;
 enddef ;
